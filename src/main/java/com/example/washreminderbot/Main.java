@@ -10,9 +10,10 @@ public class Main {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         try {
             telegramBotsApi.registerBot(new TelegramBot("WashReminderBOT",
-                    "5673942555:AAFl6zGTXiHt9h1FTNkEHwL-Q0fWx3PPJ08"));
+                    "5673942555:AAGzrZ-HyurWlTvvLf1rebaK2uT3TFRcTA4"));
+            // todo новый не коммитить (я уже заменил)
         } catch (TelegramApiException e) {
-
+            e.printStackTrace();
         }
     }
 }
