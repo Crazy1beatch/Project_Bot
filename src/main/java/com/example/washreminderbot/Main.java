@@ -9,8 +9,8 @@ public class Main {
     public static void main(String[] args) throws TelegramApiException {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         try {
-            telegramBotsApi.registerBot(new TelegramBot("WashReminderBOT",
-                    "5673942555:AAGzrZ-HyurWlTvvLf1rebaK2uT3TFRcTA4"));
+            telegramBotsApi.registerBot(new TelegramBot(System.getenv("BOT_NAME"),
+                    System.getenv("BOT_TOKEN")));
             // todo новый не коммитить (я уже заменил)
         } catch (TelegramApiException e) {
             e.printStackTrace();
