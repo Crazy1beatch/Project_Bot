@@ -17,9 +17,4 @@ public class SetPeriod implements Command{
     public String Execute(String nameOfUser) {
         return "Вас понял!";
     }
-
-    @Override
-    public void setSettings(Command[] commandList) {
-
-    }
 }

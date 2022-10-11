@@ -1,10 +1,6 @@
 package com.example.washreminderbot.service;
 
 import com.example.washreminderbot.service.comands.*;
-import javassist.compiler.ast.Pair;
-import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
-
-import java.util.*;
 
 public class BotApplication {
     BotLogic myBotLogic;
@@ -23,7 +19,10 @@ public class BotApplication {
         SetPeriod = new SetPeriod();
         HelpCommand = new HelpCommand();
         commandList = new Command[]{Initialisation, HelpCommand, ShallWashNow, SetPeriod, WhenToRemind};
-        HelpCommand.setSettings(commandList);
+        if (HelpCommand instanceof CanHaveList) {
+            CanHaveList helpList = (CanHaveList) HelpCommand;
+            helpList.setList(commandList);
+        }
     }
 
     public String commandProcessor(String inputString, String nameOfUser) {

@@ -19,9 +19,4 @@ public class Initialisation implements Command{
         return "Привет, " + nameOfUser + ", я твой персональный бот-напоминалка)\n" +
                 "Со мной твоя машинка всегда будет чистой!)";
     }
-
-    @Override
-    public void setSettings(Command[] commandList) {
-
-    }
 }

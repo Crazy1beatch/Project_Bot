@@ -25,9 +25,4 @@ public class ShallWashNow implements Command{
                 ? answerCaseYes
                 : answerCaseNo;
     }
-
-    @Override
-    public void setSettings(Command[] commandList) {
-
-    }
 }

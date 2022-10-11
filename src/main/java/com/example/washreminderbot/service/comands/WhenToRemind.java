@@ -19,9 +19,4 @@ public class WhenToRemind implements Command{
     public String Execute(String nameOfUser) {
         return "null";
     }
-
-    @Override
-    public void setSettings(Command[] commandList) {
-
-    }
 }

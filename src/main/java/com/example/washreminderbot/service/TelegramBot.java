@@ -29,7 +29,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             var messageText = update.getMessage().getText();
             var chatId = update.getMessage().getChatId();
             sendMessage(chatId, myApplication.commandProcessor(messageText, update.getMessage().getChat().getFirstName()));
-//                case "/when" -> sendMessage(chatId, "jfj");
+
         }
     }
 
