@@ -6,12 +6,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class Main {
+
     public static void main(String[] args) throws TelegramApiException {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         try {
             telegramBotsApi.registerBot(new TelegramBot(System.getenv("BOT_NAME"),
                     System.getenv("BOT_TOKEN")));
-            // todo новый не коммитить (я уже заменил)
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

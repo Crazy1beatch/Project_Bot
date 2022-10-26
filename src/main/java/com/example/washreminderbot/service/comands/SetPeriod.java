@@ -14,7 +14,7 @@ public class SetPeriod implements Command{
     }
 
     @Override
-    public String Execute(String nameOfUser) {
+    public String Execute() {
         return "Вас понял!";
     }
 }

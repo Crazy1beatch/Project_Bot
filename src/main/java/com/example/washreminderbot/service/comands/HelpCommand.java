@@ -17,7 +17,7 @@ public class HelpCommand implements Command, CanHaveList{
     private Command[] commandList = null;
 
     @Override
-    public String Execute(String nameOfUser) {
+    public String Execute() {
         StringBuilder result = new StringBuilder().append("Вот справка о том, как со мной работать:\n");
         if (this.commandList != null) {
             for (var i : this.commandList) {

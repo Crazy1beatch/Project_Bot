@@ -16,7 +16,7 @@ public class WhenToRemind implements Command{
     }
 
     @Override
-    public String Execute(String nameOfUser) {
+    public String Execute() {
         return "null";
     }
 }

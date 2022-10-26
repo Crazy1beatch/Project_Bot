@@ -3,42 +3,37 @@ package com.example.washreminderbot.service;
 import com.example.washreminderbot.service.comands.*;
 
 public class BotApplication {
-    BotLogic myBotLogic;
+    WeatherService myWeatherService;
     protected Command Initialisation;
-    protected Command HelpCommand;
+    protected CanHaveList HelpCommand;
     protected Command ShallWashNow;
     protected Command SetPeriod;
     protected Command WhenToRemind;
     public static Command[] commandList;
 
     BotApplication() {
+        // todo переделать в список команд, которые принимаем извне
         WhenToRemind = new WhenToRemind();
-        myBotLogic = new BotLogic();
+        myWeatherService = new WeatherService();
         Initialisation = new Initialisation();
-        ShallWashNow = new ShallWashNow(myBotLogic);
+        ShallWashNow = new ShallWashNow(myWeatherService);
         SetPeriod = new SetPeriod();
         HelpCommand = new HelpCommand();
-        commandList = new Command[]{Initialisation, HelpCommand, ShallWashNow, SetPeriod, WhenToRemind};
-        if (HelpCommand instanceof CanHaveList) {
-            CanHaveList helpList = (CanHaveList) HelpCommand;
-            helpList.setList(commandList);
-        }
+        commandList = new Command[]{Initialisation, HelpCommand, ShallWashNow};
+        HelpCommand.setList(commandList);
     }
 
     public String commandProcessor(String inputString, String nameOfUser) {
-        boolean isFlag = false;
-        Command tmpCommand = null;
         for (var i : commandList) {
             if (i.isTriggered(inputString)) {
-                isFlag = true;
-                tmpCommand = i;
+                if (i instanceof CanHaveNameOfUser) {
+                    CanHaveNameOfUser initializationName = (CanHaveNameOfUser) i;
+                    initializationName.setNameOfUser(nameOfUser);
+                }
+                return i.Execute();
             }
         }
-        if (isFlag) {
-            return tmpCommand.Execute(nameOfUser);
-        } else {
-            return defaultAnswer();
-        }
+        return defaultAnswer();
     }
 
     private final String defaultAnswer = "Извини, я просто глупый бот";

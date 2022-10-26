@@ -4,7 +4,7 @@ import com.example.washreminderbot.service.BotApplication;
 
 import java.util.Objects;
 
-public class Initialisation implements Command{
+public class Initialisation implements Command, CanHaveNameOfUser{
     private final String helpAnswer = """
             /start - начать работу с ботом или сбросить настройки""";
     public String getHelp() {
@@ -15,8 +15,14 @@ public class Initialisation implements Command{
         return nameOfCommand.equals("/start");
     }
 
-    public String Execute(String nameOfUser) {
+    private String nameOfUser = "dsf";
+    public String Execute() {
         return "Привет, " + nameOfUser + ", я твой персональный бот-напоминалка)\n" +
                 "Со мной твоя машинка всегда будет чистой!)";
+    }
+
+    @Override
+    public void setNameOfUser(String nameOfUser) {
+        this.nameOfUser = nameOfUser;
     }
 }
