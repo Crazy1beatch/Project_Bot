@@ -41,9 +41,13 @@ public class TelegramBot extends TelegramLongPollingBot {
                 double lat = update.getMessage().getLocation().getLatitude();
                 double lon = update.getMessage().getLocation().getLongitude();
                 var city = GetCityByCoordinates.getCity(lat, lon);
-                dataBase.setCity(chatId, "usersdata", city);
-                sendMessage(chatId, "Хмм \uD83E\uDD78, кажется твой город - " + city);
-                sendMessage(chatId, "Супер, теперь я знаю где ты)");
+                if (city == null) {
+                    sendMessage(chatId, "Мда, вот это дыра, я без понятия, где это \uD83D\uDDFF");
+                } else {
+                    dataBase.setCity(chatId, "usersdata", city);
+                    sendMessage(chatId, "Хмм \uD83E\uDD78, кажется твой город - " + city);
+                    sendMessage(chatId, "Супер, теперь я знаю где ты)");
+                }
             }
             else if(dataBase.getCoordinateStatus(chatId, "usersdata")){
                 sendMessage(chatId, "Я всё ещё жду твоей геолокации -_-(");

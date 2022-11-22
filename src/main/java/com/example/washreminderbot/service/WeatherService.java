@@ -13,6 +13,8 @@ public class WeatherService {
         var weatherCondition = weatherApi.getListOfWeather(city);
 
         var result = true;
+        if (weatherCondition == null)
+            return new resultOfIsWeatherGood(false, true);
         for (var currentDayCondition : weatherCondition) {
             if (currentDayCondition.getRainCondition() != null ||
                     currentDayCondition.getSnowCondition() != null) {
@@ -20,7 +22,7 @@ public class WeatherService {
                 break;
             }
         }
-        return new resultOfIsWeatherGood(result, weatherCondition.size() == 0 || weatherCondition != null);
+        return new resultOfIsWeatherGood(result, weatherCondition.size() == 0);
     }
     // Result<>
     // Result.Ok(...)

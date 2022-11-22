@@ -6,20 +6,26 @@ import java.sql.SQLException;
 
 public class DataBasePostgreSQL implements DataBase {
     private static Connection connection;
+    private static String DATABASE_USER;
+    private static String DATABASE_PASSWORD;
+    private static String DATABASE_URL;
 
     public DataBasePostgreSQL(String DATABASE_USER, String DATABASE_PASSWORD, String DATABASE_URL) {
+        DataBasePostgreSQL.DATABASE_USER = DATABASE_USER;
+        DataBasePostgreSQL.DATABASE_PASSWORD = DATABASE_PASSWORD;
+        DataBasePostgreSQL.DATABASE_URL = DATABASE_URL;
 
-        try {
-            connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("DataBaseConnection FAIL");
-        }
     }
 
     @Override
     public boolean getCoordinateStatus(long chatID, String tableName) {
         try {
+            try {
+                connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("DataBaseConnection FAIL");
+            }
             var statement = connection.createStatement();
             var response = String.format("SELECT need_coordinates from %s where chat_id = %d", tableName, chatID);
             var resultSet = statement.executeQuery(response);
